@@ -17,6 +17,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 header a {
@@ -35,6 +36,7 @@ header #logo {
 .header_icons {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .header_icons i {
@@ -47,7 +49,7 @@ header #logo {
 }
 
 .dropbtn {
-    background-color: #1b1b1b;
+    background-color: transparent;
     border: none;
     color: white;
     transform: scale(1.5, 1.5);
@@ -109,13 +111,12 @@ header #logo {
 
 .pagination {
     background-color: white;
-    color: rgb(11, 0, 61);
+    color: #923892;
     width: 460px;
     display: flex;
     justify-content: center;
     margin: auto;
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 20px;
     font-weight: 500;
     border-radius: 8px;
@@ -138,7 +139,7 @@ header #logo {
 .pagination ul li.num:hover,
 .pagination ul li.btn:hover  {
     color: white;
-    background-color: rgb(11, 0, 61);
+    background-color: #923892;
 }
 
 .search_page {
@@ -147,7 +148,6 @@ header #logo {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
 }
 
@@ -161,17 +161,18 @@ input {
 }
 
 button {
-    border: 1px solid white;
+    border: 1px solid #923892;
     border-radius: 8px;
     width: 40px;
     height: 40px;
     margin: 10px;
-    background-color: rgb(11, 0, 61);
-    color: white;
+    background-color: #1b1b1b;
+    color: #923892;
     font-weight: 600;
 }
 
 button:hover {
-    background-color: white;
-    color: rgb(11, 0, 61);
+    background-color: #923892;
+    color: #1b1b1b;
+    border-color: #1b1b1b;
 }

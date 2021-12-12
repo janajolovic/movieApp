@@ -2,6 +2,9 @@ const api_key = "b5906b8522f50f016b9700843fbd4621";
 const container = document.getElementById("container");
 const limit = 30;
 let page = 1;
+let link = `https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`;
+const ul = document.querySelector("ul");
+const btn = document.querySelector(".submit_btn");
 
 // GENRES
 // https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
@@ -16,16 +19,17 @@ let page = 1;
 // https://api.themoviedb.org/3/trending/all/week?api_key=<<api_key>>
 
 
-const CreateCard = async () => {
-    response = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}`);
+const getData = async () => {
+    Clear()
+    response = await fetch(link);
     data = await response.json();
+    console.log(data)
     data.results.forEach(user => {
         console.log(user)
         const card = document.createElement("div");
         card.classList.add("card");
         const img = document.createElement("img");
         img.src = `https://image.tmdb.org/t/p/original/${user.poster_path}`;
-        console.log(user.poster_path)
         const name = document.createElement("h4");
         name.innerHTML = user.original_title ? user.original_title : user.original_name ;
 
@@ -33,7 +37,71 @@ const CreateCard = async () => {
         card.appendChild(name);
         container.appendChild(card);
     })
+    pagination(data.page, 30)
 }
 
 
-CreateCard()
+function pagination(page, total) {
+    let li = '';
+    next_page = page+1;
+    prev_page = page-1;
+    link = `https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`;
+
+    if (page > 1) {
+        li += `<li class="btn prev" onclick="pagination(${page-1}, ${total}), getData(link)">
+                <span><i class="fas fa-angle-left"></i> prev</span></li>`;
+    }
+
+    if (page > 2) {
+        li += `<li class="num" onclick="pagination(1, ${total}), getData(link)"><span>1</span></li>`
+        if (page > 3) {
+            li += `<li class="dots"><span>...</span></li>`
+        }
+    }
+
+    for (i = prev_page; i <= next_page; i++) {
+        if (i > total) {
+            continue
+        }
+        if (i < 1) {
+            continue
+        }
+        if (i === page) {
+            li += `<li class="num active"><span>${i}</span></li>`
+        } else li += `<li class="num" onclick="pagination(${i}, ${total}), getData(link)"><span>${i}</span></li>`
+    }
+    
+    if (page < total-1) {
+        if (page < total - 2) {
+            li += `<li class="dots"><span>...</span></li>`
+        }
+        li += `<li class="num" onclick="pagination(${total}, ${total}), getData(link)"><span>${total}</span></li>`
+    }
+    if (page < total) {
+        li += `<li class="btn next" onclick="pagination(${page+1}, ${total}), getData(link)">
+                <span>next <i class="fas fa-angle-right"></i></span></li>`;
+    }
+    
+    ul.innerHTML = li;
+  
+}
+
+
+
+function Clear() {
+    container.innerHTML = "";
+}
+
+function FindPage(total) {
+    let input = document.querySelector(".pg_input").value;
+    page = input;
+    link = `https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`;
+    pagination(page, total)
+    getData(link)
+    input = '';
+}
+
+btn.setAttribute("onclick", 'Clear(), FindPage(30)');
+
+
+getData()
