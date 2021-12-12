@@ -1,10 +1,9 @@
 const api_key = "b5906b8522f50f016b9700843fbd4621";
 const container = document.getElementById("container");
-const limit = 30;
 let page = 1;
 let link = `https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`;
-const ul = document.querySelector("ul");
-const btn = document.querySelector(".submit_btn");
+const ul = document.querySelector("ul");    // for pagination
+const btn = document.querySelector(".submit_btn");   // for searching page
 const loader = document.getElementById("loader");
 const pagination_div = document.querySelector(".pagination");
 const search_page = document.querySelector(".search_page");
@@ -22,25 +21,29 @@ const search_page = document.querySelector(".search_page");
 // https://api.themoviedb.org/3/trending/all/week?api_key=<<api_key>>
 
 
+
+// getting data for home (tranding) page
 const getData = async () => {
     Clear()
     response = await fetch(link);
     data = await response.json();
-    console.log(data)
-    data.results.forEach(user => {
-        console.log(user)
+
+    data.results.forEach(movie => {
+        console.log(movie)
         const card = document.createElement("div");
         card.classList.add("card");
+        let selected_movie = {...movie};
+
         const img = document.createElement("img");
         img.classList.add("card_img");
-        img.src = `https://image.tmdb.org/t/p/original/${user.poster_path}`;
+        img.src = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
         const img_link = document.createElement("a");
-        img_link.setAttribute("onclick", "movie()");
+        img_link.setAttribute("onclick", `moviePage(${JSON.stringify(selected_movie)})`);
         img_link.appendChild(img);
+
         const name = document.createElement("a");
-        name.setAttribute("onclick", "movie()");
-        name.innerHTML = user.original_title ? user.original_title : user.original_name;
-        
+        name.setAttribute("onclick", `moviePage(${JSON.stringify(selected_movie)})`);
+        name.innerHTML = movie.original_title ? movie.original_title : movie.original_name;
         
         card.appendChild(img_link);
         card.appendChild(name);
@@ -107,11 +110,14 @@ function FindPage(total) {
     getData(link)
 }
 
-function movie() {
+
+// single movie page
+moviePage = async (movie) => {
     Clear()
-    console.log("movieee")
     pagination_div.classList.add("hidden");
     search_page.classList.add("hidden");
+    
+    console.log(movie);
 }
 
 btn.setAttribute("onclick", 'Clear(), FindPage(30)');
