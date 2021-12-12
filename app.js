@@ -29,7 +29,7 @@ const getData = async () => {
     data = await response.json();
 
     data.results.forEach(movie => {
-        console.log(movie)
+
         const card = document.createElement("div");
         card.classList.add("card");
         let selected_movie = {...movie};
@@ -116,8 +116,19 @@ moviePage = async (movie) => {
     Clear()
     pagination_div.classList.add("hidden");
     search_page.classList.add("hidden");
+    container.classList.add(("hidden"));
     
     console.log(movie);
+
+    movie_page.classList.remove("hidden");
+
+    const image_div = document.createElement("div");
+    const movie_img = document.createElement("img");
+    movie_img.src = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
+    image_div.classList.add("movie_img");
+    image_div.appendChild(movie_img);
+    movie_page.appendChild(image_div);
+
 }
 
 btn.setAttribute("onclick", 'Clear(), FindPage(30)');
