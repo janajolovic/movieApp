@@ -5,6 +5,7 @@ let page = 1;
 let link = `https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`;
 const ul = document.querySelector("ul");
 const btn = document.querySelector(".submit_btn");
+const loader = document.getElementById("loader");
 
 // GENRES
 // https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
@@ -29,11 +30,16 @@ const getData = async () => {
         const card = document.createElement("div");
         card.classList.add("card");
         const img = document.createElement("img");
+        img.classList.add("card_img");
         img.src = `https://image.tmdb.org/t/p/original/${user.poster_path}`;
-        const name = document.createElement("h4");
+        const img_link = document.createElement("a")
+        img_link.href="movie.html";
+        img_link.appendChild(img);
+        const name = document.createElement("a");
         name.innerHTML = user.original_title ? user.original_title : user.original_name ;
+        name.href = 'movie.html';
 
-        card.appendChild(img);
+        card.appendChild(img_link);
         card.appendChild(name);
         container.appendChild(card);
     })
@@ -86,8 +92,6 @@ function pagination(page, total) {
   
 }
 
-
-
 function Clear() {
     container.innerHTML = "";
 }
@@ -98,7 +102,6 @@ function FindPage(total) {
     link = `https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`;
     pagination(page, total)
     getData(link)
-    input = '';
 }
 
 btn.setAttribute("onclick", 'Clear(), FindPage(30)');

@@ -104,13 +104,21 @@ header #logo {
     width: 100%;
 }
 
-.card h4 {
+.card a {
+    text-decoration: none;
     margin: 20px 0px;
+    color: white;
 }
 
+.card a:hover {
+    color: #923892;
+}
+
+.card img:hover {
+    opacity: 0.3;
+}
 
 .pagination {
-    background-color: white;
     color: #923892;
     width: 460px;
     display: flex;
@@ -119,7 +127,6 @@ header #logo {
     font-size: 16px;
     margin-bottom: 20px;
     font-weight: 500;
-    border-radius: 8px;
 }
 
 .pagination ul {
@@ -151,18 +158,16 @@ header #logo {
     font-weight: 500;
 }
 
-input {
+.search_page input {
     border: 1px solid white;
-    border-radius: 8px;
     width: 50px;
     height: 40px;
     margin: 10px;
     padding: 5px;
 }
 
-button {
+.search_page button {
     border: 1px solid #923892;
-    border-radius: 8px;
     width: 40px;
     height: 40px;
     margin: 10px;
@@ -171,8 +176,30 @@ button {
     font-weight: 600;
 }
 
-button:hover {
+.search_page button:hover {
     background-color: #923892;
     color: #1b1b1b;
     border-color: #1b1b1b;
+}
+
+.hidden {
+    display: none;
+}
+
+#loader {
+    border: 1.6rem solid white;
+    border-radius: 50%;
+    border-top: 1.6rem solid #56a5eb;
+    width: 12rem;
+    height: 12rem;
+    animation: spin 2s linear infinite;
+}
+  
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
 }
