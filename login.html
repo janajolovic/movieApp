@@ -33,18 +33,24 @@
         </div>
     </header>
 
-    <!-- <div id="loader"></div> -->
-    <div id="container" class="container"></div>
-    <div id="movie_page" class="movie_page hidden"></div>
-    <div class="pagination">
-        <ul>
-            
-        </ul>
-    </div>
-    <div class="search_page">
-        <input class="pg_input" type="number" min="1" max="28" value='1'>
-        <button class="submit_btn">GO</button>
-    </div>
+    <form>
+        <input 
+            placeholder="Email"
+            type="email"
+            required
+            class="input">
+        <input 
+            placeholder="Password"
+            type="password"
+            required
+            class="input">
+        <button 
+            class="login_btn" 
+            type="submit" 
+            onClick="login()">
+            Login</button>
+        <a href="signin" class="login_signin">Don't have account?</a>
+    </form>
 
 
     <script src="app.js"></script>
