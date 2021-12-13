@@ -219,13 +219,13 @@ header #logo {
 }
 
 .info {
-    width: 60%;
+    width: 65%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     height: 80%;
-    padding: 20px 0px 0px 60px;
+    padding: 0px 0px 0px 60px;
     color: white;
 }
 

@@ -110,18 +110,15 @@ function FindPage(total) {
     getData(link)
 }
 
-
 // single movie page
 moviePage = async (movie) => {
     Clear()
     pagination_div.classList.add("hidden");
     search_page.classList.add("hidden");
     container.classList.add(("hidden"));
-    
-    console.log(movie);
-
     movie_page.classList.remove("hidden");
 
+    // image
     const movie_img = document.createElement("img");
     movie_img.src = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
     movie_page.appendChild(movie_img);
@@ -129,10 +126,12 @@ moviePage = async (movie) => {
     const info_div = document.createElement("div");
     info_div.classList.add("info");
     
+    // name / title
     const name = document.createElement("h1");
     name.innerHTML = movie.original_title ? movie.original_title : movie.original_name;
     info_div.appendChild(name);
 
+    // type (seria or movie)
     const media_type = document.createElement("p");
     let span = document.createElement("span");
     span.innerHTML = "type: ";
@@ -140,6 +139,7 @@ moviePage = async (movie) => {
     media_type.innerHTML += movie.media_type;
     info_div.appendChild(media_type);
 
+    // genres
     const genres = document.createElement("p");
     let span1 = document.createElement("span");
     span1.innerHTML = "genres: ";
@@ -156,18 +156,21 @@ moviePage = async (movie) => {
     genre_list();
     info_div.appendChild(genres);
 
+    // plot / overview
     const plot = document.createElement("p");
     span.innerHTML = "plot summary: ";
     plot.appendChild(span);
     plot.innerHTML += movie.overview;
     info_div.appendChild(plot);
 
+    // release date
     const release = document.createElement("p");
     span.innerHTML = "released: ";
     release.appendChild(span);
     release.innerHTML += movie.first_air_date? movie.first_air_date.slice(0,4): movie.release_date.slice(0,4);
     info_div.appendChild(release);
 
+    // other names
     if (movie.name) {
         const other_name = document.createElement("p");
         span.innerHTML = "other name: ";
@@ -176,12 +179,14 @@ moviePage = async (movie) => {
         info_div.appendChild(other_name);
     }
 
+    // rating
     const rating = document.createElement("p");
     span.innerHTML = "rating: ";
     rating.appendChild(span);
     rating.innerHTML += movie.vote_average;
     info_div.appendChild(rating);
 
+    // add to favorites
     const add_fav_btn = document.createElement("button");
     add_fav_btn.classList.add("fav_btn");
     add_fav_btn.innerHTML = `<i class="far fa-star"></i>  Add to favorites`;
