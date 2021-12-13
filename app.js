@@ -125,27 +125,62 @@ moviePage = async (movie) => {
     const movie_img = document.createElement("img");
     movie_img.src = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
     movie_page.appendChild(movie_img);
-
+    
     const info_div = document.createElement("div");
     info_div.classList.add("info");
-
+    
     const name = document.createElement("h1");
     name.innerHTML = movie.original_title ? movie.original_title : movie.original_name;
+    info_div.appendChild(name);
 
     const media_type = document.createElement("p");
     let span = document.createElement("span");
     span.innerHTML = "type: ";
     media_type.appendChild(span);
     media_type.innerHTML += movie.media_type;
+    info_div.appendChild(media_type);
+
+    const genres = document.createElement("p");
+    const genre_list = async () => {
+        response = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${api_key}&language=en-US`);
+        data = await response.json();
+        var list = ""
+        data.genres.forEach(genre => {
+            list += `${genre.name}, `
+        })
+        genres.innerHTML += list.substring(0, list.length - 2);
+    }
+
+    span.innerHTML = "genres: ";
+    genres.appendChild(span);
+    genre_list();
+    info_div.appendChild(genres);
+
+    const plot = document.createElement("p");
+    span.innerHTML = "plot summary: ";
+    plot.appendChild(span);
+    plot.innerHTML += movie.overview;
+    info_div.appendChild(plot);
 
     const release = document.createElement("p");
     span.innerHTML = "released: ";
     release.appendChild(span);
-    release.innerHTML += movie.first_air_date.slice(0,4);
-
-    info_div.appendChild(name);
-    info_div.appendChild(media_type);
+    release.innerHTML += movie.first_air_date? movie.first_air_date.slice(0,4): movie.release_date.slice(0,4);
     info_div.appendChild(release);
+
+    if (movie.name) {
+        const other_name = document.createElement("p");
+        span.innerHTML = "other name: ";
+        other_name.appendChild(span);
+        other_name.innerHTML += movie.name;
+        info_div.appendChild(other_name);
+    }
+
+    const rating = document.createElement("p");
+    span.innerHTML = "rating: ";
+    rating.appendChild(span);
+    rating.innerHTML += movie.vote_average;
+    info_div.appendChild(rating);
 
     movie_page.appendChild(info_div);
 }

@@ -219,7 +219,7 @@ header #logo {
 }
 
 .info {
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -235,6 +235,7 @@ header #logo {
 
 .info p {
     margin-top: 10px;
+    line-height: 1.3;
     font-size: 18px;
 }
 
