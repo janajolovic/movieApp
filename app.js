@@ -141,6 +141,9 @@ moviePage = async (movie) => {
     info_div.appendChild(media_type);
 
     const genres = document.createElement("p");
+    let span1 = document.createElement("span");
+    span1.innerHTML = "genres: ";
+    genres.appendChild(span1);
     const genre_list = async () => {
         response = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${api_key}&language=en-US`);
         data = await response.json();
@@ -150,9 +153,6 @@ moviePage = async (movie) => {
         })
         genres.innerHTML += list.substring(0, list.length - 2);
     }
-
-    span.innerHTML = "genres: ";
-    genres.appendChild(span);
     genre_list();
     info_div.appendChild(genres);
 
@@ -181,6 +181,11 @@ moviePage = async (movie) => {
     rating.appendChild(span);
     rating.innerHTML += movie.vote_average;
     info_div.appendChild(rating);
+
+    const add_fav_btn = document.createElement("button");
+    add_fav_btn.classList.add("fav_btn");
+    add_fav_btn.innerHTML = `<i class="far fa-star"></i>  Add to favorites`;
+    info_div.appendChild(add_fav_btn);
 
     movie_page.appendChild(info_div);
 }

@@ -242,3 +242,18 @@ header #logo {
 .info h1 {
     font-size: 30px;
 }
+
+.fav_btn {
+    width: 150px;
+    padding: 12px 8px;
+    background-color: #1b1b1b;
+    border: 1px solid #923892;
+    color: #923892;
+    margin-top: 20px;
+}
+
+.fav_btn:hover {
+    background-color: #923892;
+    color: #1b1b1b;
+    border-color: #1b1b1b;
+}
