@@ -122,13 +122,32 @@ moviePage = async (movie) => {
 
     movie_page.classList.remove("hidden");
 
-    const image_div = document.createElement("div");
     const movie_img = document.createElement("img");
     movie_img.src = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
-    image_div.classList.add("movie_img");
-    image_div.appendChild(movie_img);
-    movie_page.appendChild(image_div);
+    movie_page.appendChild(movie_img);
 
+    const info_div = document.createElement("div");
+    info_div.classList.add("info");
+
+    const name = document.createElement("h1");
+    name.innerHTML = movie.original_title ? movie.original_title : movie.original_name;
+
+    const media_type = document.createElement("p");
+    let span = document.createElement("span");
+    span.innerHTML = "type: ";
+    media_type.appendChild(span);
+    media_type.innerHTML += movie.media_type;
+
+    const release = document.createElement("p");
+    span.innerHTML = "released: ";
+    release.appendChild(span);
+    release.innerHTML += movie.first_air_date.slice(0,4);
+
+    info_div.appendChild(name);
+    info_div.appendChild(media_type);
+    info_div.appendChild(release);
+
+    movie_page.appendChild(info_div);
 }
 
 btn.setAttribute("onclick", 'Clear(), FindPage(30)');

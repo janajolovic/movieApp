@@ -217,3 +217,27 @@ header #logo {
     width: 25%;
     height: 80%;
 }
+
+.info {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 80%;
+    padding: 20px 0px 0px 60px;
+    color: white;
+}
+
+.info span {
+    color: #923892;
+}
+
+.info p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.info h1 {
+    font-size: 30px;
+}
