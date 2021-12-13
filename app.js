@@ -1,12 +1,13 @@
 const api_key = "b5906b8522f50f016b9700843fbd4621";
 const container = document.getElementById("container");
 let page = 1;
-let link = `https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`;
 const ul = document.querySelector("ul");    // for pagination
 const btn = document.querySelector(".submit_btn");   // for searching page
 const loader = document.getElementById("loader");
 const pagination_div = document.querySelector(".pagination");
 const search_page = document.querySelector(".search_page");
+const movie_page = document.getElementById("movie_page");
+
 
 // GENRES
 // https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
@@ -23,7 +24,7 @@ const search_page = document.querySelector(".search_page");
 
 
 // getting data for home (tranding) page
-const getData = async () => {
+const getData = async (link) => {
     Clear()
     response = await fetch(link);
     data = await response.json();
@@ -116,7 +117,7 @@ moviePage = async (movie) => {
     pagination_div.classList.add("hidden");
     search_page.classList.add("hidden");
     container.classList.add(("hidden"));
-    movie_page.classList.remove("hidden");
+    movie_page.style.display = "flex";
 
     // image
     const movie_img = document.createElement("img");
@@ -195,6 +196,12 @@ moviePage = async (movie) => {
     movie_page.appendChild(info_div);
 }
 
+function popular() {
+    // Clear();
+    console.log("popular")
+    getData(`https://api.themoviedb.org/3/trending/all/day?api_key=${api_key}&page=${page}`);
+}
+
 btn.setAttribute("onclick", 'Clear(), FindPage(30)');
 
-getData()
+getData(`https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`)

@@ -204,7 +204,7 @@ header #logo {
 }
 
 .movie_page {
-    display: flex;
+    display: none;
     width: 100%;
     height: 90vh;
     padding: 0px 50px 10px 50px;
