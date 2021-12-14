@@ -7,6 +7,7 @@ const loader = document.getElementById("loader");
 const pagination_div = document.querySelector(".pagination");
 const search_page = document.querySelector(".search_page");
 const movie_page = document.getElementById("movie_page");
+const genres_div = document.getElementById("genres");
 
 // by name
 // https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=the+avengers
@@ -117,7 +118,8 @@ moviePage = async (movie) => {
     Clear()
     pagination_div.classList.add("hidden");
     search_page.classList.add("hidden");
-    container.classList.add(("hidden"));
+    container.classList.add("hidden");
+    genres_div.classList.add("hidden");
     movie_page.style.display = "flex";
 
     // image
@@ -202,12 +204,17 @@ function popular() {
 }
 
 const genres = async () => {
-    response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`);
-    data = await response.json();
-    console.log(data)
     pagination_div.classList.add("hidden");
     search_page.classList.add("hidden");
     Clear();
+    response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`);
+    data = await response.json();
+    data.genres.forEach(genre => {
+        const genre_btn = document.createElement("button");
+        genre_btn.classList.add("genre_btn");
+        genre_btn.innerHTML = genre.name;
+        container.appendChild(genre_btn);
+    })
 }
 
 btn.setAttribute("onclick", 'Clear(), FindPage(30)');
