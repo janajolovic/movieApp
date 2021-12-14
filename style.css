@@ -294,3 +294,30 @@ form {
 .login_signin:hover {
     color: #923892;
 }
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 50px 40px 50px;
+    width: 70%;
+    height: 90vh;
+    margin: auto;
+}
+
+.genre_btn {
+    width: 200px;
+    background-color: #1b1b1b;
+    color: #923892;
+    border: #923892 1px solid;
+    padding: 12px 8px;
+    margin: 15px 20px;
+}
+
+.genre_btn:hover {
+    color: #1b1b1b;
+    border-color: #1b1b1b;
+    background-color: #923892;
+}

@@ -213,7 +213,9 @@ const genres = async () => {
         const genre_btn = document.createElement("button");
         genre_btn.classList.add("genre_btn");
         genre_btn.innerHTML = genre.name;
-        container.appendChild(genre_btn);
+        if (genre.name !== "Western")
+            genres_div.appendChild(genre_btn);
+        
     })
 }
 
