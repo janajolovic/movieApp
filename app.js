@@ -8,7 +8,8 @@ const pagination_div = document.querySelector(".pagination");
 const search_page = document.querySelector(".search_page");
 const movie_page = document.getElementById("movie_page");
 
-
+// by name
+// https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=the+avengers
 // GENRES
 // https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
 
@@ -197,7 +198,6 @@ moviePage = async (movie) => {
 }
 
 function popular() {
-    // Clear();
     console.log("popular")
     getData(`https://api.themoviedb.org/3/trending/all/day?api_key=${api_key}&page=${page}`);
 }
@@ -205,3 +205,4 @@ function popular() {
 btn.setAttribute("onclick", 'Clear(), FindPage(30)');
 
 getData(`https://api.themoviedb.org/3/trending/all/week?api_key=${api_key}&page=${page}`)
+
