@@ -198,8 +198,16 @@ moviePage = async (movie) => {
 }
 
 function popular() {
-    console.log("popular")
     getData(`https://api.themoviedb.org/3/trending/all/day?api_key=${api_key}&page=${page}`);
+}
+
+const genres = async () => {
+    response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`);
+    data = await response.json();
+    console.log(data)
+    pagination_div.classList.add("hidden");
+    search_page.classList.add("hidden");
+    Clear();
 }
 
 btn.setAttribute("onclick", 'Clear(), FindPage(30)');
